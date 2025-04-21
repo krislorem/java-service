@@ -3,6 +3,9 @@ ENV HOME=/usr/app
 RUN mkdir -p HOME
 WORKDIR $HOME
 ADD . WORKDIR
+COPY .mvn .mvn
+COPY mvnw pom.xml ./
+RUN chmod +x $HOME/mvnw
 RUN --mount=type=cache,target=/root/.m2 $HOME/mvnw -f $HOME/pom.xml clean package
 
 FROM openjdk:17-slim
