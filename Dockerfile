@@ -5,8 +5,8 @@ WORKDIR $HOME
 ADD . WORKDIR
 COPY .mvn .mvn
 COPY mvnw pom.xml ./
-RUN chmod +x $HOME/mvnw
-RUN --mount=type=cache,target=/root/.m2 $HOME/mvnw -f $HOME/pom.xml clean package
+RUN chmod +x ./mvnw
+RUN --mount=type=cache,target=/root/.m2 ./mvnw -f $HOME/pom.xml clean package
 
 FROM openjdk:17-slim
 ARG JAR_FILE=/usr/app/target/*.jar
